@@ -12,14 +12,14 @@ def not_blank(question):
 
         print("Please enter an answer.\n")
 
-def int_check(question, low=None, high=None, allow_enter=False):
+def int_check(question, low=0, high=9999, allow_enter=False):
     """Checks users enter an integer between two values"""
     error = f"Please enter a valid number"
     while True:
         try:
             response = input(question)
 
-            if low <= response <= high:
+            if low <= int(response) <= high:
                 return int(response)
             elif allow_enter == True and response == "":
                 response = 10
@@ -31,7 +31,7 @@ def int_check(question, low=None, high=None, allow_enter=False):
         except ValueError:
             print(error)
 
-def get_expenses(exp_type, quantity):
+def get_expenses(exp_type, quantity=10):
     """Gets fixed expenses and outputs
     panda as a string and a subtotal of the expenses"""
 
@@ -58,14 +58,14 @@ def get_expenses(exp_type, quantity):
             break
 
         if exp_type == "variable":
-            amount = int_check(f"Quantity <enter for {quantity}>: ", 0.01, 9999, True)
+            amount = int_check(f"Quantity <enter for 10>: ", 1, 9999, True)
 
             if amount == "":
                 amount = quantity
 
             how_much_question = int_check("Price for one? ")
 
-        cost = int_check(how_much_question)
+        cost = how_much_question
 
         all_items.append(item_name)
         all_amounts.append(amount)
@@ -86,7 +86,7 @@ def get_expenses(exp_type, quantity):
         expense_string = tabulate(expense_frame[['Item', 'Cost']], headers='keys',
                                   tablefmt='psql', showindex=False)
 
-    return expense_frame, subtotal
+    return expense_string, subtotal
 
 def currency(a):
     return "${:.2f}".format(a)
