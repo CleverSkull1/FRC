@@ -26,6 +26,7 @@ def int_check(question, low=0, high=9999, allow_enter=False):
                 return response
             elif response == "xxx":
                 break
+                return None
             else:
                 print(error)
         except ValueError:
