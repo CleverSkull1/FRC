@@ -288,7 +288,7 @@ print()
 for item in to_write:
     print(item)
 
-file_name = f"{input('Enter file name: ')}_{year}-{month}-{day}_{hour}-{minute}-{second}"
+file_name = f"F_{input('Enter file name: ')}_{day}-{month}-{year}_{hour}-{minute}-{second}"
 write_to = "{}.txt".format(file_name)
 
 text_file = open(write_to, "w+")
